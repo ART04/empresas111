@@ -1,0 +1,1109 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super111 - Sitio Oficial Interactivo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --rojo-super: #e31e24;
+            --amarillo-super: #f9d611;
+            --blanco: #ffffff;
+            --oscuro: #212529;
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            overflow-x: hidden;
+            background: #fafafa;
+            color: var(--oscuro);
+        }
+
+        /* ==================== HEADER MODERNO ==================== */
+        .top-header {
+            background: linear-gradient(135deg, var(--rojo-super) 0%, #b81c1f 100%);
+            backdrop-filter: blur(20px);
+            border-bottom: 3px solid var(--amarillo-super);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .top-header.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .header-menu a {
+            color: var(--blanco);
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 20px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .header-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--amarillo-super);
+            transition: width 0.3s ease;
+        }
+
+        .header-menu a:hover::after {
+            width: 100%;
+        }
+
+        .header-menu a:hover {
+            color: var(--amarillo-super);
+        }
+
+        .header-menu a i {
+            margin-right: 8px;
+        }
+
+        .btn-tool {
+            background: var(--amarillo-super);
+            color: #000;
+            border: none;
+            font-weight: 700;
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(249, 214, 17, 0.3);
+        }
+
+        .btn-tool:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(249, 214, 17, 0.5);
+        }
+
+        /* ==================== HERO PARALLAX ==================== */
+        .hero-parallax {
+            background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(227, 30, 36, 0.6) 100%),
+                url('img/banner.png');
+            height: 100vh;
+            min-height: 600px;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-parallax::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(249, 214, 17, 0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 5rem;
+            font-weight: 800;
+            letter-spacing: -3px;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+        }
+
+        .hero-content h2 {
+            font-size: 1.8rem;
+            color: var(--amarillo-super);
+            font-weight: 600;
+            margin: 20px 0;
+            animation: fadeInUp 1s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ==================== SCROLL REVEAL ANIMATIONS ==================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(80px) scale(0.9);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .reveal-delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .reveal-delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .reveal-delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        .reveal-delay-4 {
+            transition-delay: 0.4s;
+        }
+
+        .reveal-delay-5 {
+            transition-delay: 0.5s;
+        }
+
+        /* ==================== SECTION TITLES ==================== */
+        .section-title {
+            color: var(--oscuro);
+            font-weight: 800;
+            font-size: 2.5rem;
+            letter-spacing: -1px;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--rojo-super), var(--amarillo-super));
+            border-radius: 2px;
+        }
+
+        .section-title.centered {
+            display: block;
+            text-align: center;
+        }
+
+        .section-title.centered::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* ==================== CARDS SERVICIOS - ICONOS GRANDES ==================== */
+        .card-service {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 50px 30px;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.5, 0, 0, 1);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .card-service::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--rojo-super) 0%, var(--amarillo-super) 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 0;
+        }
+
+        .card-service:hover::before {
+            opacity: 1;
+        }
+
+        .card-service:hover {
+            transform: translateY(-20px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(227, 30, 36, 0.25);
+        }
+
+        .card-service .icon-wrapper {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, rgba(227, 30, 36, 0.1) 0%, rgba(249, 214, 17, 0.1) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            transition: all 0.5s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .card-service:hover .icon-wrapper {
+            transform: scale(1.2) rotate(10deg);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 60px rgba(255, 255, 255, 0.4);
+        }
+
+        .card-service i {
+            font-size: 70px;
+            color: var(--rojo-super);
+            transition: all 0.5s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-service:hover i {
+            color: var(--blanco);
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+            animation: iconPulse 0.6s ease infinite;
+        }
+
+        @keyframes iconPulse {
+
+            0%,
+            100% {
+                transform: scale(1.1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        .card-service h5 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            transition: color 0.5s ease;
+        }
+
+        .card-service:hover h5 {
+            color: var(--blanco);
+        }
+
+        .card-service p {
+            font-size: 0.95rem;
+            color: #666;
+            position: relative;
+            z-index: 1;
+            transition: color 0.5s ease;
+        }
+
+        .card-service:hover p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Ripple effect */
+        .card-service .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(0);
+            animation: rippleEffect 0.6s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes rippleEffect {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* ==================== 3D TILT EFFECT ==================== */
+        .tilt-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        /* ==================== LOGO BOUCLE MODERNO ==================== */
+        .logo-bucle-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 40px 0;
+            border-radius: 30px;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+
+        .logo-moving-track {
+            display: flex;
+            gap: 80px;
+            animation: smoothLoop 20s linear infinite;
+        }
+
+        .logo-moving-track img {
+            height: 250px;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.1));
+            transition: transform 0.3s ease;
+        }
+
+        .logo-moving-track img:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        @keyframes smoothLoop {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* ==================== MISSION VISION CARDS ==================== */
+        .info-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            border-left: 6px solid;
+            transition: all 0.4s ease;
+            height: 100%;
+        }
+
+        .info-card.mision {
+            border-left-color: var(--rojo-super);
+        }
+
+        .info-card.vision {
+            border-left-color: var(--amarillo-super);
+        }
+
+        .info-card:hover {
+            transform: translateX(10px);
+            box-shadow: -10px 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ==================== TABLE MODERNA ==================== */
+        .modern-table {
+            background: var(--blanco);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+        }
+
+        .modern-table thead {
+            background: linear-gradient(135deg, var(--rojo-super) 0%, #b81c1f 100%);
+            color: white;
+        }
+
+        .modern-table thead th {
+            padding: 25px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .modern-table tbody td {
+            padding: 25px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.3s;
+        }
+
+        .modern-table tbody tr:hover td {
+            background: rgba(249, 214, 17, 0.1);
+        }
+
+        .modern-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* ==================== CTA BUTTON ==================== */
+        .btn-catalogo {
+            background: linear-gradient(135deg, var(--rojo-super) 0%, #b81c1f 100%);
+            color: white;
+            padding: 20px 50px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            border: 3px solid transparent;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(227, 30, 36, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-catalogo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-catalogo:hover::before {
+            left: 100%;
+        }
+
+        .btn-catalogo:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(227, 30, 36, 0.4);
+            background: linear-gradient(135deg, var(--oscuro) 0%, #1a1a1a 100%);
+        }
+
+        .btn-catalogo i {
+            font-size: 1.3rem;
+            transition: transform 0.3s;
+        }
+
+        .btn-catalogo:hover i {
+            transform: translateX(5px);
+        }
+
+        /* ==================== CONTACT CARDS ==================== */
+        .contact-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(249, 214, 17, 0.1) 100%);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 50px 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.5s cubic-bezier(0.5, 0, 0, 1);
+            cursor: pointer;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .contact-card i {
+            font-size: 60px;
+            color: var(--rojo-super);
+            margin-bottom: 20px;
+            transition: all 0.5s ease;
+        }
+
+        .contact-card:hover i {
+            transform: scale(1.2) rotate(10deg);
+            color: var(--amarillo-super);
+            filter: drop-shadow(0 0 20px rgba(249, 214, 17, 0.5));
+        }
+
+        .contact-card p {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            background: linear-gradient(135deg, var(--oscuro) 0%, #1a1a1a 100%);
+            color: white;
+            padding: 80px 0 40px;
+        }
+
+        footer h2 {
+            color: var(--amarillo-super);
+            font-weight: 800;
+            margin-bottom: 40px;
+        }
+
+        footer a {
+            color: var(--amarillo-super);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        /* ==================== FLOATING ELEMENTS ==================== */
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .floating-shapes span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            animation: float 25s linear infinite;
+            bottom: -150px;
+        }
+
+        .floating-shapes span:nth-child(1) {
+            left: 25%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 0s;
+        }
+
+        .floating-shapes span:nth-child(2) {
+            left: 10%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 2s;
+            animation-duration: 12s;
+        }
+
+        .floating-shapes span:nth-child(3) {
+            left: 70%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 4s;
+        }
+
+        .floating-shapes span:nth-child(4) {
+            left: 40%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 0s;
+            animation-duration: 18s;
+        }
+
+        .floating-shapes span:nth-child(5) {
+            left: 65%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 0s;
+        }
+
+        .floating-shapes span:nth-child(6) {
+            left: 75%;
+            width: 110px;
+            height: 110px;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 0;
+            }
+
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+        }
+
+        /* ==================== MOUSE FOLLOWER ==================== */
+        .cursor-glow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(227, 30, 36, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .cursor-glow.active {
+            opacity: 1;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 992px) {
+            .header-menu {
+                width: 100%;
+                text-align: center;
+                order: 3;
+                margin-top: 15px;
+            }
+
+            .header-menu a {
+                margin: 5px 10px;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .hero-content h2 {
+                font-size: 1.3rem;
+            }
+
+            .hero-parallax {
+                background-attachment: scroll;
+                min-height: 500px;
+            }
+
+            .logo-bucle-container {
+                height: 200px;
+            }
+
+            .logo-moving-track img {
+                height: 140px;
+            }
+
+            .card-service {
+                padding: 30px 20px;
+            }
+
+            .card-service i {
+                font-size: 50px;
+            }
+
+            .card-service .icon-wrapper {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cursor-glow" id="cursorGlow"></div>
+    <header class="top-header" id="mainHeader">
+        <div class="container d-flex justify-content-between align-items-center flex-wrap">
+            <div class="fw-bold small">
+                <i class="fa-solid fa-clock-rotate-left"></i> <span id="reloj-full">Sincronizando...</span>
+            </div>
+            <nav class="header-menu">
+                <a href="#empresa"><i class="fa-solid fa-hotel"></i><span data-lang="menu_empresa">Empresa</span></a>
+                <a href="#servicios"><i class="fa-solid fa-layer-group"></i><span
+                        data-lang="menu_servicios">Servicios</span></a>
+                <a href="#contacto"><i class="fa-solid fa-headset"></i><span
+                        data-lang="menu_contacto">Contacto</span></a>
+            </nav>
+            <div class="d-flex align-items-center">
+                <button class="btn-tool">
+                    <i class="fa-solid fa-money-bill-transfer"></i> USD: <span id="val-dolar">...</span>
+                </button>
+                <button class="btn-tool" onclick="changeLanguage()">
+                    <i class="fa-solid fa-language"></i> <span id="lang-label">EN</span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <section class="hero-parallax">
+        <div class="floating-shapes">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="hero-content">
+            <h1 class="display-1 fw-bold">Super111</h1>
+            <h2 data-lang="hero_slogan">"Certeza, Fe y Convicción en cada producto"</h2>
+            <p class="lead mt-4" data-lang="hero_desc">Insumos Esenciales para tu Canasta Básica y Servicios Logísticos
+                de Excelencia.</p>
+        </div>
+    </section>
+    <section id="empresa" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title" data-lang="section_empresa">Nuestra Trayectoria</h2>
+            <div class="row g-4 mb-5">
+                <div class="col-lg-6 reveal reveal-delay-1">
+                    <p class="fs-5" data-lang="empresa_desc">Super111 ofrece productos esenciales con calidad, confianza
+                        y atención cercana. Superamos las expectativas de nuestros clientes cada día.</p>
+                    <div class="info-card mision mt-4">
+                        <h4 class="text-danger fw-bold"><i class="fa-solid fa-rocket me-2"></i><span
+                                data-lang="mision_tit">Misión</span></h4>
+                        <p data-lang="mision_desc">Productos de calidad a precios justos con una experiencia cercana.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6 reveal reveal-delay-2">
+                    <div class="info-card vision h-100">
+                        <h4 class="text-warning fw-bold"><i class="fa-solid fa-mountain-sun me-2"></i><span
+                                data-lang="vision_tit">Visión</span></h4>
+                        <p data-lang="vision_desc">Ser la empresa líder en productos esenciales, reconocida por su
+                            confianza y servicio.</p>
+                        <h5 class="mt-4 text-danger"><i class="fa-solid fa-check-double me-2"></i><span
+                                data-lang="why_us">¿Por qué elegirnos?</span></h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fa-solid fa-shield-halved text-success me-2"></i> <span
+                                    data-lang="opt1">Calidad Garantizada</span></li>
+                            <li class="mb-2"><i class="fa-solid fa-truck-fast text-success me-2"></i> <span
+                                    data-lang="opt2">Logística Eficiente</span></li>
+                            <li><i class="fa-solid fa-users-gear text-success me-2"></i> <span data-lang="opt3">Planes
+                                    Personalizados</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-5 bg-white">
+        <div class="container">
+            <h2 class="section-title" data-lang="perfil_tit">Perfil de la Empresa</h2>
+            <div class="row align-items-center g-5">
+                <div class="col-md-5 reveal reveal-delay-1">
+                    <div class="logo-bucle-container">
+                        <div class="logo-moving-track">
+                            <img src="img/logo.png" alt="Super111 Logo">
+                            <img src="img/logo.png" alt="Super111 Logo">
+                            <img src="img/logo.png" alt="Super111 Logo">
+                            <img src="img/logo.png" alt="Super111 Logo">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 reveal reveal-delay-2">
+                    <div class="mb-4">
+                        <h3 class="text-danger fw-bold" data-lang="about_name">Super 111 Productos y Más</h3>
+                        <p class="fs-5 text-secondary" data-lang="about_desc">Es una empresa con más de 6 años de
+                            experiencia en el suministro y entrega personalizada de insumos para cocinas profesionales,
+                            comedores industriales y eventos.</p>
+                    </div>
+                    <div class="info-card" style="border-left-color: var(--rojo-super);">
+                        <h4 class="text-danger fw-bold"><i class="fa-solid fa-people-group me-2"></i><span
+                                data-lang="team_tit">Nuestro Equipo</span></h4>
+                        <p class="fs-5 mb-0" data-lang="team_desc">Contamos con personal altamente capacitado en
+                            logística, distribución y atención al cliente.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="servicios" class="py-5 bg-light">
+        <div class="container text-center">
+            <h2 class="section-title centered" data-lang="section_servicios">Nuestros Servicios Especializados</h2>
+            <div class="row g-4 mt-2">
+                <div class="col-md-3 reveal reveal-delay-1">
+                    <div class="card-service tilt-card" data-tilt>
+                        <div class="icon-wrapper">
+                            <i class="fa-solid fa-cart-flatbed-suitcase"></i>
+                        </div>
+                        <h5 class="fw-bold" data-lang="s1_tit">Canasta Básica</h5>
+                        <p class="small" data-lang="s1_desc">Entrega de alimentos esenciales y perecederos.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 reveal reveal-delay-2">
+                    <div class="card-service tilt-card" data-tilt>
+                        <div class="icon-wrapper">
+                            <i class="fa-solid fa-boxes-stacked"></i>
+                        </div>
+                        <h5 class="fw-bold" data-lang="s2_tit">Abarrotes</h5>
+                        <p class="small" data-lang="s2_desc">Suministro integral para empresas.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 reveal reveal-delay-3">
+                    <div class="card-service tilt-card" data-tilt>
+                        <div class="icon-wrapper">
+                            <i class="fa-solid fa-utensils"></i>
+                        </div>
+                        <h5 class="fw-bold" data-lang="s3_tit">Comedores</h5>
+                        <p class="small" data-lang="s3_desc">Insumos para cocinas de gran capacidad.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 reveal reveal-delay-4">
+                    <div class="card-service tilt-card" data-tilt>
+                        <div class="icon-wrapper">
+                            <i class="fa-solid fa-dolly"></i>
+                        </div>
+                        <h5 class="fw-bold" data-lang="s4_tit">Logística</h5>
+                        <p class="small" data-lang="s4_desc">Entregas rápidas y seguras.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal mt-5 reveal-delay-5">
+                <a href="https://heyzine.com/flip-book/6b79fafc45.html" target="_blank" class="btn-catalogo">
+                    <span data-lang="btn_catalogo">VER CATÁLOGO ONLINE</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="py-5 bg-white">
+        <div class="container">
+            <h2 class="section-title text-end" style="border-left:0; padding-right:20px;" data-lang="section_exp">
+                Trayectoria en Grandes Proyectos</h2>
+            <div class="modern-table mt-4 reveal">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr class="text-center">
+                            <th><i class="fa-solid fa-building-shield me-2"></i><span data-lang="t_col1">SOCIO COMERCIAL
+                                    / PROYECTO</span></th>
+                            <th><i class="fa-solid fa-calendar-check me-2"></i><span data-lang="t_col2">TIEMPO DE
+                                    SERVICIO</span></th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr>
+                            <td>ICA FLUOR</td>
+                            <td data-lang="t_val1">6 años</td>
+                        </tr>
+                        <tr>
+                            <td>CAMPAMENTO SAMSUNG</td>
+                            <td data-lang="t_val2">1 año</td>
+                        </tr>
+                        <tr>
+                            <td>REFINERÍAS (DOS BOCAS Y SALINA CRUZ)</td>
+                            <td data-lang="t_val1">6 años</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <footer id="contacto" class="py-5 text-white text-center">
+        <div class="container">
+            <h2 class="mb-4 fw-bold" data-lang="contact_tit">CANALES DE CONTACTO</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-5 reveal reveal-delay-1">
+                    <div class="contact-card">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                        <p class="h3">9932644074</p>
+                    </div>
+                </div>
+                <div class="col-md-5 reveal reveal-delay-2">
+                    <div class="contact-card">
+                        <i class="fa-solid fa-envelope-circle-check"></i>
+                        <p class="h3">contacto@empresas111.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-5">
+                <p class="mb-0">www.super111productosymas.org | Facebook: @super111</p>
+                <p class="text-secondary small mt-3">©2010 -2026 Super111. <span data-lang="footer_copy">Calidad,
+                        Confianza y Servicio Cercano.</span></p>
+            </div>
+            <div class="footer-credits mt-5 pt-4 border-top border-secondary">
+                <p class="mb-2">Visitas totales al sitio: <strong>10,512</strong></p>
+                <p class="mb-2">© 2026 Todos los derechos reservados · Hecho con <span class="text-danger">❤</span> por
+                    <a href="https://prowebsoluciones.org/" target="_blank">Proweb Soluciones</a></p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // ===== INTERSECTION OBSERVER PARA REVEAL =====
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        // ===== HEADER SCROLL EFFECT =====
+        const header = document.getElementById('mainHeader');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        // ===== CURSOR GLOW EFFECT =====
+        const cursorGlow = document.getElementById('cursorGlow');
+        document.addEventListener('mousemove', (e) => {
+            cursorGlow.style.left = e.clientX + 'px';
+            cursorGlow.style.top = e.clientY + 'px';
+        });
+        document.querySelectorAll('.card-service, .contact-card, .btn-catalogo').forEach(el => {
+            el.addEventListener('mouseenter', () => cursorGlow.classList.add('active'));
+            el.addEventListener('mouseleave', () => cursorGlow.classList.remove('active'));
+        });
+        // ===== 3D TILT EFFECT =====
+        document.querySelectorAll('[data-tilt]').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+            });
+        });
+        // ===== RIPPLE EFFECT ON CLICK =====
+        document.querySelectorAll('.card-service').forEach(card => {
+            card.addEventListener('click', function (e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const ripple = document.createElement('span');
+                ripple.className = 'ripple';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+
+                this.appendChild(ripple);
+
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+        // ===== RELOJ =====
+        function updateTime() {
+            const now = new Date();
+            const opt = { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            document.getElementById('reloj-full').innerText = now.toLocaleDateString('es-ES', opt).toUpperCase();
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+        // ===== API DÓLAR =====
+        async function fetchExchange() {
+            try {
+                const res = await fetch('https://open.er-api.com/v6/latest/USD');
+                const data = await res.json();
+                document.getElementById('val-dolar').innerText = '$' + data.rates.MXN.toFixed(2) + ' MXN';
+            } catch {
+                document.getElementById('val-dolar').innerText = 'N/A';
+            }
+        }
+        fetchExchange();
+        // ===== TRADUCCIÓN =====
+        const translations = {
+            es: {
+                menu_empresa: "Empresa", menu_servicios: "Servicios", menu_contacto: "Contacto",
+                hero_slogan: '"Certeza, Fe y Convicción"', hero_desc: "Insumos Esenciales para tu Canasta Básica y Servicios Logísticos de Excelencia.",
+                section_empresa: "Nuestra Trayectoria", empresa_desc: "Super111 ofrece productos esenciales con calidad, confianza y atención cercana.",
+                mision_tit: "Misión", mision_desc: "Productos de calidad a precios justos con una experiencia cercana.",
+                vision_tit: "Visión", vision_desc: "Ser la empresa líder en productos esenciales, reconocida por su confianza.",
+                why_us: "¿Por qué elegirnos?", opt1: "Calidad Garantizada", opt2: "Logística Eficiente", opt3: "Planes Personalizados",
+                perfil_tit: "Perfil de la Empresa", about_name: "Super 111 Productos y Más",
+                about_desc: "Empresa con más de 6 años de experiencia en el suministro de insumos para cocinas profesionales y eventos.",
+                team_tit: "Nuestro Equipo", team_desc: "Contamos con personal altamente capacitado en logística y atención.",
+                section_servicios: "Nuestros Servicios Especializados", s1_tit: "Canasta Básica", s1_desc: "Entrega de alimentos esenciales y perecederos.",
+                s2_tit: "Abarrotes", s2_desc: "Suministro integral de productos no perecederos.",
+                s3_tit: "Comedores", s3_desc: "Provisión para cocinas de gran capacidad industrial.",
+                s4_tit: "Logística", s4_desc: "Entregas rápidas y seguras adaptadas a sus requisitos.",
+                btn_catalogo: "VER CATÁLOGO ONLINE",
+                section_exp: "Trayectoria en Grandes Proyectos", t_col1: "SOCIO COMERCIAL / PROYECTO", t_col2: "TIEMPO DE SERVICIO",
+                t_val1: "6 años", t_val2: "1 año", contact_tit: "CANALES DE CONTACTO", footer_copy: "Calidad, Confianza y Servicio Cercano.",
+                btn: "EN"
+            },
+            en: {
+                menu_empresa: "Company", menu_servicios: "Services", menu_contacto: "Contact",
+                hero_slogan: '"Certainty, Faith and Conviction"', hero_desc: "Essential Supplies for your Basic Basket and Excellence Logistics Services.",
+                section_empresa: "Our Track Record", empresa_desc: "Super111 offers essential products with quality, trust and close service.",
+                mision_tit: "Mission", mision_desc: "Quality products at fair prices with a close shopping experience.",
+                vision_tit: "Vision", vision_desc: "To be the leading company in essential products, recognized for its trust.",
+                why_us: "Why choose us?", opt1: "Guaranteed Quality", opt2: "Efficient Logistics", opt3: "Customized Plans",
+                perfil_tit: "Company Profile", about_name: "Super 111 Products and More",
+                about_desc: "A company with more than 6 years of experience in the supply of items for professional kitchens.",
+                team_tit: "Our Team", team_desc: "Highly trained personnel in logistics and customer service.",
+                section_servicios: "Our Specialized Services", s1_tit: "Basic Basket", s1_desc: "Delivery of essential and perishable foods.",
+                s2_tit: "Groceries", s2_desc: "Comprehensive supply of non-perishable products.",
+                s3_tit: "Industrial Kitchens", s3_desc: "Provision for large capacity industrial kitchens.",
+                s4_tit: "Logistics", s4_desc: "Fast and secure deliveries tailored to requirements.",
+                btn_catalogo: "VIEW ONLINE CATALOG",
+                section_exp: "Track Record in Large Projects", t_col1: "COMMERCIAL PARTNER / PROJECT", t_col2: "SERVICE TIME",
+                t_val1: "6 years", t_val2: "1 year", contact_tit: "CONTACT CHANNELS", footer_copy: "Quality, Trust and Close Service.",
+                btn: "ES"
+            }
+        };
+        let lang = 'es';
+        function changeLanguage() {
+            lang = lang === 'es' ? 'en' : 'es';
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                const key = el.getAttribute('data-lang');
+                if (translations[lang][key]) {
+                    el.innerText = translations[lang][key];
+                }
+            });
+            document.getElementById('lang-label').innerText = translations[lang].btn;
+        }
+        // ===== SMOOTH SCROLL =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
